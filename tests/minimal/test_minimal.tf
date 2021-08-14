@@ -14,33 +14,35 @@ terraform {
 module "main" {
   source = "../.."
 
-  name = "ABC"
+  name          = "LEAF105"
+  id            = 105
+  serial_number = "ABCDEFGHIJKLMN"
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "fabricNodeIdentP" {
+  dn = "uni/controller/nodeidentpol/nodep-ABCDEFGHIJKLMN"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "fabricNodeIdentP" {
+  component = "fabricNodeIdentP"
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
+    got         = data.aci_rest.fabricNodeIdentP.content.name
+    want        = "LEAF105"
   }
 
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = ""
+  equal "nodeId" {
+    description = "nodeId"
+    got         = data.aci_rest.fabricNodeIdentP.content.nodeId
+    want        = "105"
   }
 
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = ""
+  equal "serial" {
+    description = "serial"
+    got         = data.aci_rest.fabricNodeIdentP.content.serial
+    want        = "ABCDEFGHIJKLMN"
   }
 }

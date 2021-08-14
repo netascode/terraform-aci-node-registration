@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Tenant name."
+  description = "Node name."
   type        = string
 
   validation {
@@ -8,24 +8,55 @@ variable "name" {
   }
 }
 
-variable "alias" {
-  description = "Tenant alias."
-  type        = string
-  default     = ""
+variable "id" {
+  description = "Node ID. Minimum value: 1. Maximum value: 4000."
+  type        = number
 
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_.-]{0,64}$", var.alias))
-    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 64."
+    condition     = var.id >= 1 && var.id <= 4000
+    error_message = "Minimum value: 1. Maximum value: 4000."
   }
 }
 
-variable "description" {
-  description = "Tenant description."
-  type        = string
-  default     = ""
+variable "pod" {
+  description = "Pod ID. Minimum value: 1. Maximum value: 255."
+  type        = number
+  default     = 1
 
   validation {
-    condition     = can(regex("^[a-zA-Z0-9\\!#$%()*,-./:;@ _{|}~?&+]{0,128}$", var.description))
-    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `\\`, `!`, `#`, `$`, `%`, `(`, `)`, `*`, `,`, `-`, `.`, `/`, `:`, `;`, `@`, ` `, `_`, `{`, `|`, }`, `~`, `?`, `&`, `+`. Maximum characters: 128."
+    condition     = var.pod >= 1 && var.pod <= 255
+    error_message = "Minimum value: 1. Maximum value: 255."
+  }
+}
+
+variable "serial_number" {
+  description = "Serial number."
+  type        = string
+
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9_.-]{1,16}$", var.serial_number))
+    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 16."
+  }
+}
+
+variable "role" {
+  description = "Node role. Choices: `leaf`, `spine`."
+  type        = string
+  default     = "leaf"
+
+  validation {
+    condition     = contains(["leaf", "spine"], var.role)
+    error_message = "Allowed values: `leaf` or `spine`."
+  }
+}
+
+variable "type" {
+  description = "Node type. Choices: `remote-leaf-wan`, `virtual`, `tier-2-leaf`, `unspecified`."
+  type        = string
+  default     = "unspecified"
+
+  validation {
+    condition     = contains(["remote-leaf-wan", "virtual", "tier-2-leaf", "unspecified"], var.type)
+    error_message = "Allowed values: `remote-leaf-wan`, `virtual`, `tier-2-leaf` or `unspecified`."
   }
 }

@@ -1,7 +1,10 @@
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_node_registration" {
+  source = "netascode/node-registration/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  name          = "LEAF105"
+  id            = 105
+  pod           = 2
+  serial_number = "ABCDEFGHIJKLMN"
+  role          = "leaf"
+  type          = "tier-2-leaf"
 }

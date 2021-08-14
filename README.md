@@ -1,22 +1,25 @@
 <!-- BEGIN_TF_DOCS -->
-[![Tests](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml)
+[![Tests](https://github.com/netascode/terraform-aci-node-registration/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-node-registration/actions/workflows/test.yml)
 
-# Terraform ACI Scaffolding Module
+# Terraform ACI Node Registration Module
 
-Description
+Manages ACI Node Registration
 
 Location in GUI:
-`Tenants` » `XXX`
+`Fabric` » `Inventory` » `Fabric Membership`
 
 ## Examples
 
 ```hcl
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_node_registration" {
+  source = "netascode/node-registration/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  name          = "LEAF105"
+  id            = 105
+  pod           = 2
+  serial_number = "ABCDEFGHIJKLMN"
+  role          = "leaf"
+  type          = "tier-2-leaf"
 }
 
 ```
@@ -38,20 +41,23 @@ module "aci_scaffolding" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | Tenant name. | `string` | n/a | yes |
-| <a name="input_alias"></a> [alias](#input\_alias) | Tenant alias. | `string` | `""` | no |
-| <a name="input_description"></a> [description](#input\_description) | Tenant description. | `string` | `""` | no |
+| <a name="input_name"></a> [name](#input\_name) | Node name. | `string` | n/a | yes |
+| <a name="input_id"></a> [id](#input\_id) | Node ID. Minimum value: 1. Maximum value: 4000. | `number` | n/a | yes |
+| <a name="input_pod"></a> [pod](#input\_pod) | Pod ID. Minimum value: 1. Maximum value: 255. | `number` | `1` | no |
+| <a name="input_serial_number"></a> [serial\_number](#input\_serial\_number) | Serial number. | `string` | n/a | yes |
+| <a name="input_role"></a> [role](#input\_role) | Node role. Choices: `leaf`, `spine`. | `string` | `"leaf"` | no |
+| <a name="input_type"></a> [type](#input\_type) | Node type. Choices: `remote-leaf-wan`, `virtual`, `tier-2-leaf`, `unspecified`. | `string` | `"unspecified"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `fvTenant` object. |
-| <a name="output_name"></a> [name](#output\_name) | Tenant name. |
+| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `fabricNodeIdentP` object. |
+| <a name="output_name"></a> [name](#output\_name) | Node name. |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aci_rest.fvTenant](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
+| [aci_rest.fabricNodeIdentP](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
 <!-- END_TF_DOCS -->

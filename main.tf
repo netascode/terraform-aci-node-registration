@@ -1,9 +1,12 @@
-resource "aci_rest" "fvTenant" {
-  dn         = "uni/tn-${var.name}"
-  class_name = "fvTenant"
+resource "aci_rest" "fabricNodeIdentP" {
+  dn         = "uni/controller/nodeidentpol/nodep-${var.serial_number}"
+  class_name = "fabricNodeIdentP"
   content = {
-    name      = var.name
-    nameAlias = var.alias
-    descr     = var.description
+    name     = var.name
+    serial   = var.serial_number
+    nodeId   = var.id
+    role     = var.role
+    nodeType = var.type
+    podId    = var.pod
   }
 }
