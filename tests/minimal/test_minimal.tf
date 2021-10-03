@@ -15,7 +15,7 @@ module "main" {
   source = "../.."
 
   name          = "LEAF105"
-  id            = 105
+  node_id       = 105
   serial_number = "ABCDEFGHIJKLMN"
 }
 

@@ -4,9 +4,9 @@ resource "aci_rest" "fabricNodeIdentP" {
   content = {
     name     = var.name
     serial   = var.serial_number
-    nodeId   = var.id
+    nodeId   = var.node_id
     role     = var.role
     nodeType = var.type
-    podId    = var.pod
+    podId    = var.pod_id
   }
 }

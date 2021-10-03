@@ -8,23 +8,23 @@ variable "name" {
   }
 }
 
-variable "id" {
+variable "node_id" {
   description = "Node ID. Minimum value: 1. Maximum value: 4000."
   type        = number
 
   validation {
-    condition     = var.id >= 1 && var.id <= 4000
+    condition     = var.node_id >= 1 && var.node_id <= 4000
     error_message = "Minimum value: 1. Maximum value: 4000."
   }
 }
 
-variable "pod" {
+variable "pod_id" {
   description = "Pod ID. Minimum value: 1. Maximum value: 255."
   type        = number
   default     = 1
 
   validation {
-    condition     = var.pod >= 1 && var.pod <= 255
+    condition     = var.pod_id >= 1 && var.pod_id <= 255
     error_message = "Minimum value: 1. Maximum value: 255."
   }
 }
