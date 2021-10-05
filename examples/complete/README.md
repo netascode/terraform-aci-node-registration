@@ -20,7 +20,6 @@ module "aci_node_registration" {
   node_id       = 105
   pod_id        = 2
   serial_number = "ABCDEFGHIJKLMN"
-  role          = "leaf"
   type          = "tier-2-leaf"
 }
 

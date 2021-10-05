@@ -1,3 +1,7 @@
+## 0.0.3
+
+- BREAKING CHANGE: remove role variable
+
 ## 0.0.2
 
 - BREAKING CHANGE: rename id variable to node_id

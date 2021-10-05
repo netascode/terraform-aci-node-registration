@@ -18,7 +18,6 @@ module "main" {
   node_id       = 105
   pod_id        = 2
   serial_number = "ABCDEFGHIJKLMN"
-  role          = "leaf"
   type          = "tier-2-leaf"
 }
 
@@ -47,12 +46,6 @@ resource "test_assertions" "fabricNodeIdentP" {
     description = "serial"
     got         = data.aci_rest.fabricNodeIdentP.content.serial
     want        = "ABCDEFGHIJKLMN"
-  }
-
-  equal "role" {
-    description = "role"
-    got         = data.aci_rest.fabricNodeIdentP.content.role
-    want        = "leaf"
   }
 
   equal "nodeType" {

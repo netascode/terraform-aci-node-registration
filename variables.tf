@@ -39,17 +39,6 @@ variable "serial_number" {
   }
 }
 
-variable "role" {
-  description = "Node role. Choices: `leaf`, `spine`."
-  type        = string
-  default     = "leaf"
-
-  validation {
-    condition     = contains(["leaf", "spine"], var.role)
-    error_message = "Allowed values: `leaf` or `spine`."
-  }
-}
-
 variable "type" {
   description = "Node type. Choices: `remote-leaf-wan`, `virtual`, `tier-2-leaf`, `unspecified`."
   type        = string
