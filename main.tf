@@ -1,4 +1,4 @@
-resource "aci_rest" "fabricNodeIdentP" {
+resource "aci_rest_managed" "fabricNodeIdentP" {
   dn         = "uni/controller/nodeidentpol/nodep-${var.serial_number}"
   class_name = "fabricNodeIdentP"
   content = {

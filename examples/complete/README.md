@@ -14,7 +14,7 @@ Note that this example will create resources. Resources can be destroyed with `t
 ```hcl
 module "aci_node_registration" {
   source  = "netascode/node-registration/aci"
-  version = ">= 0.0.2"
+  version = ">= 0.1.0"
 
   name          = "LEAF105"
   node_id       = 105
@@ -22,6 +22,5 @@ module "aci_node_registration" {
   serial_number = "ABCDEFGHIJKLMN"
   type          = "tier-2-leaf"
 }
-
 ```
 <!-- END_TF_DOCS -->

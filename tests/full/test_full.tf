@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -21,7 +21,7 @@ module "main" {
   type          = "tier-2-leaf"
 }
 
-data "aci_rest" "fabricNodeIdentP" {
+data "aci_rest_managed" "fabricNodeIdentP" {
   dn = "uni/controller/nodeidentpol/nodep-ABCDEFGHIJKLMN"
 
   depends_on = [module.main]
@@ -32,31 +32,31 @@ resource "test_assertions" "fabricNodeIdentP" {
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fabricNodeIdentP.content.name
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.name
     want        = "LEAF105"
   }
 
   equal "nodeId" {
     description = "nodeId"
-    got         = data.aci_rest.fabricNodeIdentP.content.nodeId
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.nodeId
     want        = "105"
   }
 
   equal "serial" {
     description = "serial"
-    got         = data.aci_rest.fabricNodeIdentP.content.serial
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.serial
     want        = "ABCDEFGHIJKLMN"
   }
 
   equal "nodeType" {
     description = "nodeType"
-    got         = data.aci_rest.fabricNodeIdentP.content.nodeType
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.nodeType
     want        = "tier-2-leaf"
   }
 
   equal "podId" {
     description = "podId"
-    got         = data.aci_rest.fabricNodeIdentP.content.podId
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.podId
     want        = "2"
   }
 }
