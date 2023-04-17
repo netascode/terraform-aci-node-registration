@@ -16,11 +16,12 @@ terraform {
 module "main" {
   source = "../.."
 
-  name          = "LEAF105"
-  node_id       = 105
-  pod_id        = 2
-  serial_number = "ABCDEFGHIJKLMN"
-  type          = "tier-2-leaf"
+  name           = "LEAF105"
+  node_id        = 105
+  pod_id         = 2
+  serial_number  = "ABCDEFGHIJKLMN"
+  type           = "remote-leaf-wan"
+  remote_pool_id = 2
 }
 
 data "aci_rest_managed" "fabricNodeIdentP" {
@@ -53,12 +54,18 @@ resource "test_assertions" "fabricNodeIdentP" {
   equal "nodeType" {
     description = "nodeType"
     got         = data.aci_rest_managed.fabricNodeIdentP.content.nodeType
-    want        = "tier-2-leaf"
+    want        = "remote-leaf-wan"
   }
 
   equal "podId" {
     description = "podId"
     got         = data.aci_rest_managed.fabricNodeIdentP.content.podId
+    want        = "2"
+  }
+
+  equal "extPoolId" {
+    description = "extPoolId"
+    got         = data.aci_rest_managed.fabricNodeIdentP.content.extPoolId
     want        = "2"
   }
 }

@@ -49,3 +49,13 @@ variable "type" {
     error_message = "Allowed values: `remote-leaf-wan`, `virtual`, `tier-2-leaf` or `unspecified`."
   }
 }
+
+variable "remote_pool_id" {
+  description = "Remote Pool ID. Minimum value: 0. Maximum value: 255"
+  type        = number
+
+  validation {
+    condition     = var.remote_pool_id >= 0 && var.remote_pool_id <= 255
+    error_message = "Minimum value: 0. Maximum value: 255."
+  }
+}
