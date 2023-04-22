@@ -53,6 +53,7 @@ variable "type" {
 variable "remote_pool_id" {
   description = "Remote Pool ID. Minimum value: 0. Maximum value: 255"
   type        = number
+  default     = 0
 
   validation {
     condition     = var.remote_pool_id >= 0 && var.remote_pool_id <= 255

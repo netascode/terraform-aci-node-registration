@@ -7,6 +7,6 @@ resource "aci_rest_managed" "fabricNodeIdentP" {
     nodeId    = var.node_id
     nodeType  = var.type
     podId     = var.pod_id
-    extPoolId = var.type == "remote-leaf-wan" ? var.remote_pool_id : 0
+    extPoolId = var.type == "remote-leaf-wan" ? var.remote_pool_id : null
   }
 }
