@@ -1,3 +1,7 @@
+## 0.1.1 (unreleased)
+
+- Add `remote_pool_id` variable
+
 ## 0.1.0
 
 - Migrate to devnet provider
